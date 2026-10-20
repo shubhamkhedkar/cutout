@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cutout — AI background remover & enhancer (100% in your browser)</title>
+<meta name="description" content="Remove image backgrounds and enhance photos entirely in your browser. Images never leave your device.">
+<link rel="stylesheet" href="style.css">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✂️</text></svg>">
+</head>
+<body>
+<header class="top"><h1><span aria-hidden="true">✂️</span> Cutout</h1><p>AI background removal + enhancement. Runs 100% on your device.</p></header>
+<main>
+  <section id="drop" class="drop" tabindex="0" role="button" aria-label="Upload an image: drop, paste, or click to choose a file">
+    <input id="file" type="file" accept="image/*" hidden>
+    <div class="drop-inner"><div class="icon" aria-hidden="true">⬆</div>
+      <strong>Drop an image here</strong><span>or click to browse · or paste (Ctrl/⌘+V)</span></div>
+  </section>
+
+  <section id="status" class="status" hidden aria-live="polite">
+    <div class="spinner" aria-hidden="true"></div><p id="statusMsg">Working…</p>
+    <div class="bar" role="progressbar" aria-label="Model download progress" aria-valuemin="0" aria-valuemax="100"><div id="barFill"></div></div>
+  </section>
+
+  <section id="workspace" class="workspace" hidden>
+    <div class="stage-wrap">
+      <div id="stage" class="stage">
+        <canvas id="afterCv" class="checker" aria-label="Result image"></canvas>
+        <canvas id="beforeCv" aria-label="Original image"></canvas>
+        <div id="handle" class="handle" aria-hidden="true"><span>⇆</span></div>
+        <span class="tag l">Before</span><span class="tag r">After</span>
+      </div>
+      <label class="cmp">Compare <input id="cmp" type="range" min="0" max="100" value="50" aria-label="Before/after comparison position"></label>
+    </div>
+    <aside class="panel">
+      <fieldset><legend>Background</legend>
+        <div class="seg" role="radiogroup">
+          <label><input type="radio" name="bg" value="transparent" checked><span>Transparent</span></label>
+          <label><input type="radio" name="bg" value="white"><span>White</span></label>
+          <label><input type="radio" name="bg" value="color"><span>Color</span></label>
+          <label><input type="radio" name="bg" value="blur"><span>Blur</span></label>
+        </div>
+        <label class="row" id="colorRow">Color <input id="color" type="color" value="#4f7cff" aria-label="Background color"></label>
+      </fieldset>
+      <fieldset><legend>Enhance</legend>
+        <label class="row">Denoise <output id="dnOut">60</output><input id="denoise" type="range" min="0" max="100" value="60"></label>
+        <label class="row">Sharpen <output id="shOut">40</output><input id="sharpen" type="range" min="0" max="100" value="40"></label>
+        <label class="row chk"><input id="upscale" type="checkbox"> 2× AI upscale (Swin2SR, small images only)</label>
+        <small id="upNote" class="note"></small>
+      </fieldset>
+      <div class="actions">
+        <button id="dl" class="primary">Download PNG</button>
+        <button id="reset" class="ghost">New image</button>
+      </div>
+      <small id="info" class="note"></small>
+    </aside>
+  </section>
+</main>
+<footer>🔒 Private by design: images are processed locally and never uploaded. · <a href="https://github.com/shubhamkhedkar/cutout">Source</a></footer>
+<script type="module" src="app.js"></script>
+</body>
+</html>

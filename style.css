@@ -1,0 +1,32 @@
+:root{--bg:#0d0f17;--card:#161a26;--line:#262c3d;--fg:#e9ecf5;--mut:#9aa3b8;--acc:#4f7cff;--acc2:#a35bff}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:radial-gradient(1200px 600px at 10% -10%,#1b2140,transparent),var(--bg);color:var(--fg);min-height:100vh;display:flex;flex-direction:column}
+.top{text-align:center;padding:32px 16px 8px}.top h1{margin:0;font-size:2.2rem;background:linear-gradient(90deg,var(--acc),var(--acc2));-webkit-background-clip:text;background-clip:text;color:transparent}.top p{color:var(--mut);margin:.3em 0 0}
+main{flex:1;width:min(1200px,100%);margin:0 auto;padding:16px}
+.drop{border:2px dashed var(--line);border-radius:20px;padding:64px 16px;text-align:center;cursor:pointer;transition:.25s;background:var(--card);animation:fade .5s}
+.drop:hover,.drop:focus-visible,.drop.over{border-color:var(--acc);transform:translateY(-2px);box-shadow:0 10px 40px #4f7cff33;outline:none}
+.drop-inner{display:flex;flex-direction:column;gap:6px;align-items:center}.drop span{color:var(--mut)}
+.icon{font-size:2rem;width:64px;height:64px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--acc),var(--acc2));animation:bob 2s ease-in-out infinite}
+.status{text-align:center;padding:40px;background:var(--card);border-radius:20px;margin-top:16px;animation:fade .3s}
+.spinner{width:42px;height:42px;margin:auto;border:4px solid var(--line);border-top-color:var(--acc);border-radius:50%;animation:spin 1s linear infinite}
+.bar{height:6px;background:var(--line);border-radius:3px;overflow:hidden;max-width:420px;margin:auto}#barFill{height:100%;width:0;background:linear-gradient(90deg,var(--acc),var(--acc2));transition:width .2s}
+.workspace{display:grid;grid-template-columns:1fr 300px;gap:16px;animation:fade .5s}
+@media(max-width:860px){.workspace{grid-template-columns:1fr}}
+.stage-wrap{background:var(--card);border-radius:20px;padding:12px}
+.stage{position:relative;user-select:none;touch-action:none;cursor:ew-resize;border-radius:12px;overflow:hidden;line-height:0}
+.stage canvas{width:100%;height:auto;display:block}#beforeCv{position:absolute;inset:0;clip-path:inset(0 50% 0 0)}
+.checker{background:repeating-conic-gradient(#2a2f40 0 25%,#1e2230 0 50%) 0 0/20px 20px}
+.handle{position:absolute;top:0;bottom:0;left:50%;width:2px;background:#fff;box-shadow:0 0 8px #000a;pointer-events:none}.handle span{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);background:#fff;color:#000;border-radius:50%;width:34px;height:34px;display:grid;place-items:center;line-height:1}
+.tag{position:absolute;top:10px;background:#000a;padding:4px 10px;border-radius:99px;font-size:12px;line-height:1.4}.tag.l{left:10px}.tag.r{right:10px}
+.cmp{display:flex;gap:10px;align-items:center;color:var(--mut);margin-top:10px}.cmp input{flex:1}
+.panel{background:var(--card);border-radius:20px;padding:16px;display:flex;flex-direction:column;gap:14px}
+fieldset{border:1px solid var(--line);border-radius:14px;margin:0;padding:12px}legend{padding:0 6px;color:var(--mut);font-size:13px}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:6px}.seg input{position:absolute;opacity:0}.seg span{display:block;text-align:center;padding:8px;border-radius:10px;border:1px solid var(--line);cursor:pointer;transition:.2s}
+.seg input:checked+span{background:var(--acc);border-color:var(--acc)}.seg input:focus-visible+span{outline:2px solid #fff}
+.row{display:grid;grid-template-columns:1fr auto;gap:4px;margin-top:10px;align-items:center}.row input[type=range]{grid-column:1/-1;width:100%;accent-color:var(--acc)}.row.chk{display:flex;gap:8px}
+.note{color:var(--mut);font-size:12px}
+.actions{display:flex;gap:8px}button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--line);font:inherit;font-weight:600;cursor:pointer;transition:.2s;color:var(--fg);background:transparent}
+.primary{background:linear-gradient(90deg,var(--acc),var(--acc2));border:0}.primary:hover{transform:translateY(-1px);box-shadow:0 8px 24px #4f7cff55}.ghost:hover{border-color:var(--acc)}
+footer{text-align:center;color:var(--mut);padding:20px;font-size:13px}footer a{color:var(--acc)}
+@keyframes spin{to{transform:rotate(1turn)}}@keyframes fade{from{opacity:0;transform:translateY(8px)}}@keyframes bob{50%{transform:translateY(-6px)}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+[hidden]{display:none!important}
