@@ -37,7 +37,10 @@ self.onmessage = async ({ data }) => {
       post('status', { msg: 'Upscaling 2× with Swin2SR…' });
       const img = new RawImage(new Uint8ClampedArray(data.pixels), data.width, data.height, 4).rgb();
       const out = await sr(img);
-      post('upscaled', { pixels: out.rgba().data, width: out.width, height: out.height });
+      // Swin2SR pads input to a multiple of 8 — crop back to exactly 2x
+      const W = data.width * 2, H = data.height * 2, src = out.rgba().data, px = new Uint8ClampedArray(W * H * 4);
+      for (let y = 0; y < H; y++) px.set(src.subarray(y * out.width * 4, (y * out.width + W) * 4), y * W * 4);
+      post('upscaled', { pixels: px, width: W, height: H });
     }
   } catch (e) { post('error', { msg: String(e && e.message || e) }); }
 };
